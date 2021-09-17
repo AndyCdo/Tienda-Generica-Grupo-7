@@ -1,0 +1,26 @@
+/* CREACION BASE DE DATOS */
+
+create database tienda_generica;
+
+/* CREACION TABLA USUARIOS */
+
+create table tienda_generica.usuarios(
+	cedula_usuario integer not null auto_increment primary key,
+	email_usuario varchar(255),
+	nombre_usuario varchar(255),
+	password varchar (255),
+	usuario varchar(255)
+);
+
+/* INSERTAR USUARIO INICIAL */
+
+insert into tienda_generica.usuarios (
+    email_usuario,
+    nombre_usuario,
+    password,
+    usuario
+)
+values ("admininicial", "admininicial", "admin123456", "admininicial");
+
+
+
