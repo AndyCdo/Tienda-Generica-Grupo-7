@@ -14,7 +14,7 @@
 	
 	
 	Class.forName("com.mysql.jdbc.Driver");
-	Connection conexion = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendagrupo7","root","Alsoda2183");
+	Connection conexion = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/tienda_generica","root","andrea2639");
 	PreparedStatement ps = conexion.prepareStatement("SELECT * FROM usuarios WHERE usuario = ? AND password = ?");
 	ps.setString(1, usuario);
 	ps.setString(2, password);
