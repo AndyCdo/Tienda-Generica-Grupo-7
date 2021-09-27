@@ -40,18 +40,18 @@ public class UserDAO {
 		
 	}
 	
-	public void createUser(UserDTO user) {
+	public boolean createUser(UserDTO user) {
 		MyConnection connection = new MyConnection();
 		
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("INSERT INTO usuarios VALUES ('"+ user.getCedulaUsuario()+"', '"+user.getEmailUsuario()+"', '"+user.getNombreUsuario()+"', '"+user.getPassword()+"', '"+user.getUsuario()+"'");
-			JOptionPane.showMessageDialog(null, "Se ha creado el usuario correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+			statement.executeUpdate("INSERT INTO usuarios VALUES ('"+ user.getCedulaUsuario()+"', '"+user.getEmailUsuario()+"', '"+user.getNombreUsuario()+"', '"+user.getPassword()+"', '"+user.getUsuario()+"')");
 			statement.close();
 			connection.disconect();
+			return true;
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se pudo crear el usuario \n"+e);
-		}
+		}return false;
 	}
 	
 	public UserDTO getUser(int id) {
@@ -81,19 +81,19 @@ public class UserDAO {
 		
 	}
 	
-	public void update(int id, UserDTO user) {
+	public boolean update(int id, UserDTO user) {
 		MyConnection connection = new MyConnection();
 		
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("UPDATE usuarios SET cedula_usuario = '"+ user.getCedulaUsuario()+"', email_usuario =  '"+user.getEmailUsuario()+"', nombre_usuario = '"+user.getNombreUsuario()+"', password = '"+user.getPassword()+"', usuario = '"+user.getUsuario()+"'");
-			JOptionPane.showMessageDialog(null, "Se ha creado el usuario correctamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+			statement.executeUpdate("UPDATE usuarios SET email_usuario =  '"+user.getEmailUsuario()+"', nombre_usuario = '"+user.getNombreUsuario()+"', password = '"+user.getPassword()+"', usuario = '"+user.getUsuario()+"'");
 			statement.close();
 			connection.disconect();
+			return true;
 			
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se pudo eliminar el usuario \n"+e);
-		}
+		}return false;
 	}
 	
 	

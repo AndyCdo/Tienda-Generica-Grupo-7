@@ -12,9 +12,15 @@ import com.grupo7.TiendaGenerica.DTO.UserDTO;
 public class UserController {
 	
 	@RequestMapping("/users/create")
-	public void create(UserDTO user) {
+	public boolean create(int cedulaUsuario, String emailUsuario, String nombreUsuario, String password, String usuario) {
+		UserDTO user = new UserDTO();
+		user.setCedulaUsuario(cedulaUsuario);
+		user.setEmailUsuario(emailUsuario);
+		user.setNombreUsuario(nombreUsuario);
+		user.setPassword(password);
+		user.setUsuario(usuario);
 		UserDAO dao = new UserDAO();
-		dao.createUser(user);
+		return dao.createUser(user);
 	}
 	@RequestMapping("/users/list")
 	public ArrayList <UserDTO> list(){
@@ -22,9 +28,15 @@ public class UserController {
 		return dao.userList();
 	}
 	@RequestMapping("/users/update")
-	public void update(int id, UserDTO user) {
+	public boolean update(int cedulaUsuario, String emailUsuario, String nombreUsuario, String password, String usuario) {
+		UserDTO user = new UserDTO();
+		user.setCedulaUsuario(cedulaUsuario);
+		user.setEmailUsuario(emailUsuario);
+		user.setNombreUsuario(nombreUsuario);
+		user.setPassword(password);
+		user.setUsuario(usuario);
 		UserDAO dao = new UserDAO();
-		dao.update(id, user);
+		return dao.update(cedulaUsuario, user);
 	}
 	@RequestMapping("/users/delete")
 	public boolean delete(int id) {
