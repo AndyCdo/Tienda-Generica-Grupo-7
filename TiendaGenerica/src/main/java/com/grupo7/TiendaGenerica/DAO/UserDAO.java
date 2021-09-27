@@ -86,7 +86,7 @@ public class UserDAO {
 		
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("UPDATE usuarios SET email_usuario =  '"+user.getEmailUsuario()+"', nombre_usuario = '"+user.getNombreUsuario()+"', password = '"+user.getPassword()+"', usuario = '"+user.getUsuario()+"' WHERE cedula_usuario = " + user.getCedulaUsuario();
+			statement.executeUpdate("UPDATE usuarios SET email_usuario =  '"+user.getEmailUsuario()+"', nombre_usuario = '"+user.getNombreUsuario()+"', password = '"+user.getPassword()+"', usuario = '"+user.getUsuario()+"' WHERE cedula_usuario = " + user.getCedulaUsuario());
 			statement.close();
 			connection.disconect();
 			return true;
