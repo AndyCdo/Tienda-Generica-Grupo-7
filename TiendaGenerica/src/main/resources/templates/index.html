@@ -14,7 +14,7 @@
 				url:"http://localhost:8080/users/auth?userName="+user+"&password="+password,
 				success: function(data){
 					if(data == true){
-						alert("Usuario logueado correctamente")
+						window.location = "http://localhost:8080/users"
 					}else{
 						alert("Usuario y/o Password incorrectos")
 					}
