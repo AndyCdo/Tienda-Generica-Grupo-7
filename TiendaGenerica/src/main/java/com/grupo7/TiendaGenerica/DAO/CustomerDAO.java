@@ -14,14 +14,14 @@ public class CustomerDAO {
 			PreparedStatement query = connection.getConnection().prepareStatement("SELECT * FROM clientes");
 			ResultSet result = query.executeQuery();
 			while (result.next()) {
-				CustomerDTO costumer = new CustomerDTO();
-				customer.setCedulaCliente(Integer.parseInt(result.getString("cedula_cliente")));
-				customer.setDireccionCliente(result.getString("direccion_cliente"));
-				customer.setEmailCliente(result.getString("email_cliente"));
-				customer.setNombreCliente(result.getString("nombre_cliente"));
-				customer.setTelefonoCliente(result.getString("telefono_cliente"));
+				CustomerDTO cus = new CustomerDTO();
+				cus.setCedulaCliente(Integer.parseInt(result.getString("cedula_cliente")));
+				cus.setDireccionCliente(result.getString("direccion_cliente"));
+				cus.setEmailCliente(result.getString("email_cliente"));
+				cus.setNombreCliente(result.getString("nombre_cliente"));
+				cus.setTelefonoCliente(result.getString("telefono_cliente"));
 										
-				customer.add(costumer);
+				customer.add(cus);
 			}
 			result.close();
 			query.close();
