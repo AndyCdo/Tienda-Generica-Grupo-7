@@ -36,7 +36,7 @@ public class CustomerDAO {
 		MyConnection connection = new MyConnection();
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("INSERT INTO usuarios VALUES ('" + customer.getCedulaCliente() + "', '"	+ customer.getDireccionCliente() + "', '" + customer.getEmailCliente() + "', '" + customer.getNombreCliente() + "', '" + customer.getTelefonoCliente()+ "')");
+			statement.executeUpdate("INSERT INTO clientes VALUES ('" + customer.getCedulaCliente() + "', '"	+ customer.getDireccionCliente() + "', '" + customer.getEmailCliente() + "', '" + customer.getNombreCliente() + "', '" + customer.getTelefonoCliente()+ "')");
 			statement.close();
 			connection.disconect();
 			return true;
