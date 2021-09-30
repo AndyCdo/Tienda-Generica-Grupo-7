@@ -23,7 +23,7 @@ h1 {
 				success: function(data){
 					if(data && data.cedulaCliente){
 						document.getElementById("id").value= data.cedulaCliente
-						document.getElementById("direccionl").value= data.direccionCliente
+						document.getElementById("direccion").value= data.direccionCliente
 						document.getElementById("email").value= data.emailCliente
 						document.getElementById("nombre").value= data.nombreCliente
 						document.getElementById("telefono").value= data.telefonoCliente
@@ -45,7 +45,7 @@ h1 {
 			
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/costumer/create?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
+				url:"http://localhost:8080/customer/create?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
 				success: function(data){
 					if(data == true){
 						alert("Cliente creado correctamente")
@@ -64,7 +64,7 @@ h1 {
 			var telefono = document.getElementById("telefono").value
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/costumer/update?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
+				url:"http://localhost:8080/customer/update?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
 				success: function(data){
 					if(data == true){
 						alert("Cliente actualizado correctamente")
@@ -79,7 +79,7 @@ h1 {
 			var id = document.getElementById("id").value
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/costumer/delete?id="+id,
+				url:"http://localhost:8080/customer/delete?id="+id,
 				success: function(data){
 					if(data == true){
 						alert("Cliente eliminado correctamente")
@@ -95,7 +95,7 @@ h1 {
 </head>
 <body>
 	<div class="h2" style="justify-content: center; display: flex; margin-top: 20px;">
-		Fontend Clientes
+		Clientes
 	</div>
 	<div style="display: flex; justify-content: center; margin-bottom: 50px;">
 		<div style="max-width: 1000px; width: 100%; padding: 0 40px;">
