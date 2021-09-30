@@ -17,5 +17,11 @@ public class WebController {
 	{
 		return "users";
 	}
+	@RequestMapping("/customer")
+	public String customerView()
+	{
+		return "customer";
 		
+	}
+			
 }
