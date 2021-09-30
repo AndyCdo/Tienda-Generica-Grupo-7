@@ -24,4 +24,12 @@ public class WebController {
 	{
 		return "prov";		
 	}	
+	
+	@RequestMapping("/customer")
+	public String customerView()
+	{
+		return "customer";
+		
+	}
+			
 }
