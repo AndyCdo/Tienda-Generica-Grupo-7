@@ -16,6 +16,12 @@ public class WebController {
 	public String usersView()
 	{
 		return "users";
-	}
 		
+	}
+	
+	@RequestMapping("/provider")
+	public String providerView()
+	{
+		return "prov";		
+	}	
 }
