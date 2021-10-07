@@ -10,17 +10,17 @@
 			var id = document.getElementById("id").value
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/get?id="+id,
+				url:"http://localhost:8080/users/get?id="+id,
 				success: function(data){
 					if(data && data.cedulaUsuario){
-						document.getElementById("id").value= data.cedulaProveedor
-						document.getElementById("email").value= data.emailProveedor
-						document.getElementById("userName").value= data.nombreProveedor
+						document.getElementById("id").value= data.cedulaUsuario
+						document.getElementById("email").value= data.emailUsuario
+						document.getElementById("userName").value= data.nombreUsuario
 						document.getElementById("password").value= data.password
 						document.getElementById("user").value= data.usuario
 
 					}else{
-						alert("Proveedor no se ha encontrado")
+						alert("Usuario no se ha encontrado")
 					}
 					
 				}
@@ -35,12 +35,12 @@
 			
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/create?cedulaProveedor="+id+"&usuario="+user+"&nombreProveedor="+userName+"&password="+password+"&emailProveedor="+email,
+				url:"http://localhost:8080/users/create?cedulaUsuario="+id+"&usuario="+user+"&nombreUsuario="+userName+"&password="+password+"&emailUsuario="+email,
 				success: function(data){
 					if(data == true){
 						alert("Usuario creado correctamente")
 					}else{
-						alert("Proveedor no creado")
+						alert("Usuario no creado")
 					}
 					
 				}
@@ -54,12 +54,12 @@
 			var email = document.getElementById("email").value
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/update?cedulaProveedor="+id+"&usuario="+user+"&nombreProveedor="+userName+"&password="+password+"&emailProveedor="+email,
+				url:"http://localhost:8080/users/update?cedulaUsuario="+id+"&usuario="+user+"&nombreUsuario="+userName+"&password="+password+"&emailUsuario="+email,
 				success: function(data){
 					if(data == true){
-						alert("Proveedor actualizado correctamente")
+						alert("Usuario actualizado correctamente")
 					}else{
-						alert("Proveedor no actualizado")
+						alert("Usuario no actualizado")
 					}
 					
 				}
@@ -69,12 +69,12 @@
 			var id = document.getElementById("id").value
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/delete?id="+id,
+				url:"http://localhost:8080/users/delete?id="+id,
 				success: function(data){
 					if(data == true){
-						alert("Proveedor eliminado correctamente")
+						alert("Usuario eliminado correctamente")
 					}else{
-						alert("Proveedor no se pudo eliminar")
+						alert("Usuario no se pudo eliminar")
 					}
 					
 				}
@@ -103,13 +103,13 @@
 					  <a class="nav-link" aria-current="page" href="/customers">Clientes</a>
 					</li>
 					<li class="nav-item">
-					  <a class="nav-link active" href="/providers">Proveedores</a>
+					  <a class="nav-link" href="/providers">Proveedores</a>
 					</li>
 					<li class="nav-item">
 					  <a class="nav-link" href="/products">Productos</a>
 					</li>
 					<li class="nav-item">
-					  <a class="nav-link" href="/sales">Ventas</a>
+					  <a class="nav-link active" href="/sales">Ventas</a>
 					</li>
 					<li class="nav-item">
 					  <a class="nav-link" href="/repors">Reportes</a>

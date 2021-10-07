@@ -1,169 +1,241 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Bienvenidos a Grupo18-Gr7</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
-		function get(){
-			var id = document.getElementById("id").value
-			var authRequest = $.ajax({
-				type:"GET",
-				url:"http://localhost:8080/users/get?id="+id,
-				success: function(data){
-					if(data && data.cedulaUsuario){
-						document.getElementById("id").value= data.cedulaUsuario
-						document.getElementById("email").value= data.emailUsuario
-						document.getElementById("userName").value= data.nombreUsuario
-						document.getElementById("password").value= data.password
-						document.getElementById("user").value= data.usuario
+  <head>
+    <meta charset="utf-8" />
+    <title>Bienvenidos a Grupo18-Gr7</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      function get() {
+        var id = document.getElementById("id").value;
+        var authRequest = $.ajax({
+          type: "GET",
+          url: "http://localhost:8080/users/get?id=" + id,
+          success: function (data) {
+            if (data && data.cedulaUsuario) {
+              document.getElementById("id").value = data.cedulaUsuario;
+              document.getElementById("email").value = data.emailUsuario;
+              document.getElementById("userName").value = data.nombreUsuario;
+              document.getElementById("password").value = data.password;
+              document.getElementById("user").value = data.usuario;
+            } else {
+              alert("Usuario no se ha encontrado");
+            }
+          },
+        });
+      }
+      function create() {
+        var id = document.getElementById("id").value;
+        var user = document.getElementById("user").value;
+        var userName = document.getElementById("userName").value;
+        var password = document.getElementById("password").value;
+        var email = document.getElementById("email").value;
 
-					}else{
-						alert("Usuario no se ha encontrado")
-					}
-					
-				}
-			})
-		}
-		function create(){
-			var id = document.getElementById("id").value
-			var user = document.getElementById("user").value
-			var userName = document.getElementById("userName").value
-			var password = document.getElementById("password").value
-			var email = document.getElementById("email").value
-			
-			var authRequest = $.ajax({
-				type:"GET",
-				url:"http://localhost:8080/users/create?cedulaUsuario="+id+"&usuario="+user+"&nombreUsuario="+userName+"&password="+password+"&emailUsuario="+email,
-				success: function(data){
-					if(data == true){
-						alert("Usuario creado correctamente")
-					}else{
-						alert("Usuario no creado")
-					}
-					
-				}
-			})
-		}
-		function update(){
-			var id = document.getElementById("id").value
-			var user = document.getElementById("user").value
-			var userName = document.getElementById("userName").value
-			var password = document.getElementById("password").value
-			var email = document.getElementById("email").value
-			var authRequest = $.ajax({
-				type:"GET",
-				url:"http://localhost:8080/users/update?cedulaUsuario="+id+"&usuario="+user+"&nombreUsuario="+userName+"&password="+password+"&emailUsuario="+email,
-				success: function(data){
-					if(data == true){
-						alert("Usuario actualizado correctamente")
-					}else{
-						alert("Usuario no actualizado")
-					}
-					
-				}
-			})
-		}
-		function deleteUser(){
-			var id = document.getElementById("id").value
-			var authRequest = $.ajax({
-				type:"GET",
-				url:"http://localhost:8080/users/delete?id="+id,
-				success: function(data){
-					if(data == true){
-						alert("Usuario eliminado correctamente")
-					}else{
-						alert("Usuario no se pudo eliminar")
-					}
-					
-				}
-			})
-		}
-	
-	</script>
-</head>
-<body>
-	<div class="h2" style="justify-content: center; display: flex; margin-top: 20px;">
-		Tienda Genérica
-	</div>
-	<div style="display: flex; justify-content: center; margin-bottom: 50px;">
-		<div style="max-width: 1000px; width: 100%; padding: 0 40px;">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container-fluid">
-			  <a class="navbar-brand" href="/users">Usuarios</a>
-			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			  </button>
-			  <div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-				  <li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="/customers">Clientes</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="/provider">Proveedores</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="/products">Productos</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="/sales">Ventas</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="/repors">Reportes</a>
-				  </li>
-				</ul>
-			  </div>
-			</div>
-		  </nav>
-	</div>
-	</div>
-	
-	<form>
-		<div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-			<div style="max-width: 1000px; width: 100%; padding: 0 40px;">
-				<div class="row">
-					<div class="col">
-						<label class="form-label">Cédula</label>
-						<input class="form-control" id="id" >
-						
-					  </div>
-					  <div class="col">
-						<label class="form-label">Usuario</label>
-						<input class="form-control" id="user">
-					  </div>
-				</div>
-				<div class="row">
-					<div class="col">
-						<label  class="form-label">Nombre Completo</label>
-						<input class="form-control" id="userName">
-						
-					  </div>
-					  <div class="col">
-						<label class="form-label">Contraseña</label>
-						<input type="password" class="form-control" id="password">
-					  </div>
-				</div>
-				<div class="row">
-					<div class="col">
-						<label class="form-label">Correo Electrónico</label>
-						<input type="email" class="form-control" id="email">
-						
-					</div>
-					<div class="col" ></div>
-		
-				</div>
-				<div style="margin-top: 50px; display: flex; justify-content: center;">
-					<button style="margin:0 10px" type="button" class="btn btn-primary" onclick="get()">Consultar</button>
-					<button style="margin:0 10px" type="button" class="btn btn-primary" onclick="create()">Crear</button>
-					<button style="margin:0 10px" type="button" class="btn btn-primary" onclick="update()">Actualizar</button>
-					<button style="margin:0 10px" type="button" class="btn btn-primary" onclick="deleteUser()">Borrar</button>
-				</div>
-	
-			  </div>
-		</div>
-			  
-	</form>
-	
-</body>
+        var authRequest = $.ajax({
+          type: "GET",
+          url:
+            "http://localhost:8080/users/create?cedulaUsuario=" +
+            id +
+            "&usuario=" +
+            user +
+            "&nombreUsuario=" +
+            userName +
+            "&password=" +
+            password +
+            "&emailUsuario=" +
+            email,
+          success: function (data) {
+            if (data == true) {
+              alert("Usuario creado correctamente");
+            } else {
+              alert("Usuario no creado");
+            }
+          },
+        });
+      }
+      function update() {
+        var id = document.getElementById("id").value;
+        var user = document.getElementById("user").value;
+        var userName = document.getElementById("userName").value;
+        var password = document.getElementById("password").value;
+        var email = document.getElementById("email").value;
+        var authRequest = $.ajax({
+          type: "GET",
+          url:
+            "http://localhost:8080/users/update?cedulaUsuario=" +
+            id +
+            "&usuario=" +
+            user +
+            "&nombreUsuario=" +
+            userName +
+            "&password=" +
+            password +
+            "&emailUsuario=" +
+            email,
+          success: function (data) {
+            if (data == true) {
+              alert("Usuario actualizado correctamente");
+            } else {
+              alert("Usuario no actualizado");
+            }
+          },
+        });
+      }
+      function deleteUser() {
+        var id = document.getElementById("id").value;
+        var authRequest = $.ajax({
+          type: "GET",
+          url: "http://localhost:8080/users/delete?id=" + id,
+          success: function (data) {
+            if (data == true) {
+              alert("Usuario eliminado correctamente");
+            } else {
+              alert("Usuario no se pudo eliminar");
+            }
+          },
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div
+      class="h2"
+      style="justify-content: center; display: flex; margin-top: 20px"
+    >
+      TIENDA GENERICA GRUPO 7
+    </div>
+    <div style="display: flex; justify-content: center; margin-bottom: 50px">
+      <div style="max-width: 1000px; width: 100%; padding: 0 40px">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" href="/users">Usuarios</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="/customers"
+                    >Clientes</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/providers">Proveedores</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/products">Productos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/sales">Ventas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/repors">Reportes</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <form>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+        "
+      >
+        <div style="max-width: 1000px; width: 100%; padding: 0 40px">
+          <div class="row">
+            <div class="col-4">
+              <label class="form-label">Cédula</label>
+              <input class="form-control" id="id" />
+            </div>
+            <div class="col-2" style="margin-top: auto">
+              <button type="button" class="btn btn-primary" onclick="get()">
+                Consultar
+              </button>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Nombre</label>
+              <input class="form-control" id="clientName" disabled />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <label class="form-label">Producto</label>
+              <input class="form-control" id="id" />
+            </div>
+            <div class="col-2" style="margin-top: auto">
+              <button type="button" class="btn btn-primary" onclick="get()">
+                Consultar
+              </button>
+            </div>
+            <div class="col-3">
+              <label class="form-label">Nombre</label>
+              <input class="form-control" id="clientName" disabled/>
+            </div>
+            <div class="col-2">
+              <label class="form-label">Cantidad</label>
+              <input class="form-control" id="clientName" />
+            </div>
+            <div class="col-2">
+              <label class="form-label">Valor Total</label>
+              <input class="form-control" id="clientName" disabled />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col">Total Venta</div>
+                <div class="col">
+                  <input class="form-control" id="clientName" disabled />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">Total Iva</div>
+                <div class="col">
+                  <input class="form-control" id="clientName" disabled />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">Total con Iva</div>
+                <div class="col">
+                  <input class="form-control" id="clientName" disabled />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 50px; display: flex; justify-content: center">
+            <button
+              style="margin: 0 10px"
+              type="button"
+              class="btn btn-primary"
+              onclick="get()"
+            >
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
 </html>
