@@ -68,7 +68,7 @@ public class ProviderDAO {
 			connection.disconect();
 
 		} catch (Exception e) {
-			System.out.println("No se pudo crear el proveedor \n" + e);
+			System.out.println("No se pudo cargar el proveedor \n" + e);
 		}
 		return pro;
 	}
@@ -85,7 +85,7 @@ public class ProviderDAO {
 			return true;
 
 		} catch (Exception e) {
-			System.out.println("No se pudo eliminar el proveedor \n" + e);
+			System.out.println("No se pudo actualizar el proveedor \n" + e);
 		}
 		return false;
 	}
