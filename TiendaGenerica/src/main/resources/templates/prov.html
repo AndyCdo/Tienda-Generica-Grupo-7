@@ -7,17 +7,17 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 		function get(){
-			var id = document.getElementById("id").value
+			var nit = document.getElementById("nit").value
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/get?id="+id,
+				url:"http://localhost:8080/prov/get?nit="+nit,
 				success: function(data){
 					if(data && data.cedulaUsuario){
-						document.getElementById("id").value= data.cedulaProveedor
-						document.getElementById("email").value= data.emailProveedor
+						document.getElementById("nit").value= data.nitProveedor
+						document.getElementById("direccion").value= data.direccionProveedor
 						document.getElementById("userName").value= data.nombreProveedor
-						document.getElementById("password").value= data.password
-						document.getElementById("user").value= data.usuario
+						document.getElementById("telefono").value= data.telefonoProveedor
+						document.getElementById("ciudad").value= data.ciudadProveedor
 
 					}else{
 						alert("Proveedor no se ha encontrado")
@@ -27,18 +27,18 @@
 			})
 		}
 		function create(){
-			var id = document.getElementById("id").value
-			var user = document.getElementById("user").value
+			var nit = document.getElementById("nit").value
+			var ciudad = document.getElementById("ciudad").value
 			var userName = document.getElementById("userName").value
-			var password = document.getElementById("password").value
-			var email = document.getElementById("email").value
+			var telefono = document.getElementById("telefono").value
+			var direccion = document.getElementById("direccion").value
 			
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/create?cedulaProveedor="+id+"&usuario="+user+"&nombreProveedor="+userName+"&password="+password+"&emailProveedor="+email,
+				url:"http://localhost:8080/prov/create?nitProveedor="+nit+"&ciudad="+ciudad+"&nombreProveedor="+userName+"&telefono="+telefono+"&direccionProveedor="+direccion,
 				success: function(data){
 					if(data == true){
-						alert("Usuario creado correctamente")
+						alert("Proveedor creado correctamente")
 					}else{
 						alert("Proveedor no creado")
 					}
@@ -47,14 +47,14 @@
 			})
 		}
 		function update(){
-			var id = document.getElementById("id").value
-			var user = document.getElementById("user").value
+			var nit = document.getElementById("nit").value
+			var ciudad = document.getElementById("ciudad").value
 			var userName = document.getElementById("userName").value
-			var password = document.getElementById("password").value
-			var email = document.getElementById("email").value
+			var telefono = document.getElementById("telefono").value
+			var direccion = document.getElementById("direccion").value
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/update?cedulaProveedor="+id+"&usuario="+user+"&nombreProveedor="+userName+"&password="+password+"&emailProveedor="+email,
+				url:"http://localhost:8080/prov/update?nitProveedor="+nit+"&ciudad="+ciudad+"&nombreProveedor="+userName+"&telefono="+telefono+"&direccionProveedor="+direccion,
 				success: function(data){
 					if(data == true){
 						alert("Proveedor actualizado correctamente")
@@ -66,10 +66,10 @@
 			})
 		}
 		function deleteUser(){
-			var id = document.getElementById("id").value
+			var nit = document.getElementById("nit").value
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/delete?id="+id,
+				url:"http://localhost:8080/prov/delete?nit="+nit,
 				success: function(data){
 					if(data == true){
 						alert("Proveedor eliminado correctamente")
@@ -85,7 +85,7 @@
 </head>
 <body>
 	<div class="h2" style="justify-content: center; display: flex; margin-top: 20px;">
-		Tienda Genérica
+		Proveedores
 	</div>
 	<div style="display: flex; justify-content: center; margin-bottom: 50px;">
 		<div style="max-width: 1000px; width: 100%; padding: 0 40px;">
@@ -124,34 +124,30 @@
 			<div style="max-width: 1000px; width: 100%; padding: 0 40px;">
 				<div class="row">
 					<div class="col">
-						<label class="form-label">Cédula</label>
-						<input class="form-control" id="id" >
+						<label class="form-label">NIT</label>
+						<input class="form-control" nit="nit" >
 						
 					  </div>
 					  <div class="col">
-						<label class="form-label">Usuario</label>
-						<input class="form-control" id="user">
+						<label class="form-label">Ciudad</label>
+						<input class="form-control" nit="ciudad">
 					  </div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<label  class="form-label">Nombre Completo</label>
-						<input class="form-control" id="userName">
-						
+						<label  class="form-label">Nombre Proveedor</label>
+						<input class="form-control" nit="userName">	
+					  </div>   		
+			    		<div class="col">
+						<label class="form-label">Teléfono</label>
+						<input class="form-control" nit="telefono">
 					  </div>
-					  <div class="col">
-						<label class="form-label">Contraseña</label>
-						<input type="password" class="form-control" id="password">
-					  </div>
-				</div>
 				<div class="row">
 					<div class="col">
-						<label class="form-label">Correo Electrónico</label>
-						<input type="email" class="form-control" id="email">
-						
+						<label class="form-label">Dirección</label>
+						<input type="direccion" class="form-control"nit="direccion">
 					</div>
 					<div class="col" ></div>
-		
 				</div>
 				<div style="margin-top: 50px; display: flex; justify-content: center;">
 					<button style="margin:0 10px" type="button" class="btn btn-primary" onclick="get()">Consultar</button>
