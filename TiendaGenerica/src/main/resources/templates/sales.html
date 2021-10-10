@@ -11,94 +11,139 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-      function get() {
+      function getCustomer() {
         var id = document.getElementById("id").value;
-        var authRequest = $.ajax({
+        var customerRequest = $.ajax({
           type: "GET",
-          url: "http://localhost:8080/users/get?id=" + id,
+          url: "http://localhost:8080/customer/get?id=" + id,
           success: function (data) {
-            if (data && data.cedulaUsuario) {
-              document.getElementById("id").value = data.cedulaUsuario;
-              document.getElementById("email").value = data.emailUsuario;
-              document.getElementById("userName").value = data.nombreUsuario;
-              document.getElementById("password").value = data.password;
-              document.getElementById("user").value = data.usuario;
+            if (data && data.cedulaCliente) {
+              document.getElementById("clientName").value = data.nombreCliente;
             } else {
-              alert("Usuario no se ha encontrado");
+              alert("Cliente no se ha encontrado");
             }
           },
         });
       }
-      function create() {
-        var id = document.getElementById("id").value;
-        var user = document.getElementById("user").value;
-        var userName = document.getElementById("userName").value;
-        var password = document.getElementById("password").value;
-        var email = document.getElementById("email").value;
 
-        var authRequest = $.ajax({
+      var productPrice = {};
+      var productIva = {};
+      function getProduct(index) {
+        var productCode = document.getElementById("product" + index).value;
+        var productRequest = $.ajax({
           type: "GET",
-          url:
-            "http://localhost:8080/users/create?cedulaUsuario=" +
-            id +
-            "&usuario=" +
-            user +
-            "&nombreUsuario=" +
-            userName +
-            "&password=" +
-            password +
-            "&emailUsuario=" +
-            email,
+          url: "http://localhost:8080/products/get?codigo=" + productCode,
           success: function (data) {
-            if (data == true) {
-              alert("Usuario creado correctamente");
+            if (data && data.codigo_producto) {
+              document.getElementById("productName" + index).value =
+                data.nombre_producto;
+              productPrice[index] = data.precio_venta;
+              productIva[index] = data.iva_compra;
             } else {
-              alert("Usuario no creado");
+              alert("Producto no encontrado");
             }
           },
         });
       }
-      function update() {
-        var id = document.getElementById("id").value;
-        var user = document.getElementById("user").value;
-        var userName = document.getElementById("userName").value;
-        var password = document.getElementById("password").value;
-        var email = document.getElementById("email").value;
-        var authRequest = $.ajax({
-          type: "GET",
-          url:
-            "http://localhost:8080/users/update?cedulaUsuario=" +
-            id +
-            "&usuario=" +
-            user +
-            "&nombreUsuario=" +
-            userName +
-            "&password=" +
-            password +
-            "&emailUsuario=" +
-            email,
-          success: function (data) {
-            if (data == true) {
-              alert("Usuario actualizado correctamente");
-            } else {
-              alert("Usuario no actualizado");
-            }
-          },
-        });
-      }
-      function deleteUser() {
-        var id = document.getElementById("id").value;
-        var authRequest = $.ajax({
-          type: "GET",
-          url: "http://localhost:8080/users/delete?id=" + id,
-          success: function (data) {
-            if (data == true) {
-              alert("Usuario eliminado correctamente");
-            } else {
-              alert("Usuario no se pudo eliminar");
-            }
-          },
-        });
+
+      function amountChange(index) {
+        var amount = parseInt(
+          document.getElementById("amount" + index).value,
+          10
+        );
+        if (!amount || amount <= 0) {
+          alert("Valor de cantidad incorrecto");
+          return;
+        }
+        var productTotal = productPrice[index] * amount;
+        document.getElementById("value" + index).value = productTotal;
+        var price1 = parseInt(document.getElementById("value1").value, 10);
+        var price2 = parseInt(document.getElementById("value2").value, 10);
+        var price3 = parseInt(document.getElementById("value3").value, 10);
+        var priceSale = 0;
+        if (price1) {
+          priceSale += price1;
+        }
+        if (price2) {
+          priceSale += price2;
+        }
+        if (price3) {
+          priceSale += price3;
+        }
+        document.getElementById("totalSale").value = priceSale;
+        var productIva1 = (price1 * productIva[1]) / 100;
+        var productIva2 = (price2 * productIva[2]) / 100;
+        var productIva3 = (price3 * productIva[3]) / 100;
+        var totalIva = 0;
+        if (productIva1) {
+          totalIva += productIva1;
+        }
+        if (productIva2) {
+          totalIva += productIva2;
+        }
+        if (productIva3) {
+          totalIva += productIva3;
+        }
+        document.getElementById("totalIva").value = totalIva;
+        var total = totalIva + priceSale;
+        document.getElementById("total").value = total;
+
+        function confirm() {
+          var clientId = document.getElementById("id").value;
+		  var userId = localStorage.getItem("userId");
+          var total = document.getElementById("total").value;
+          var totalIva = document.getElementById("totalIva").value;
+          var salesTotal = document.getElementById("totalSale").value;
+          var detailSale = [
+            {
+              codigo_producto: document.getElementById("product1"),
+              cantidad: document.getElementById("amount1"),
+              valor_unitario: productPrice[1],
+              valor_total: document.getElementById("value1"),
+            },
+          ];
+		  if (productPrice[2]){
+			  detailSale.push( {
+              codigo_producto: document.getElementById("product2"),
+              cantidad: document.getElementById("amount2"),
+              valor_unitario: productPrice[2],
+              valor_total: document.getElementById("value2"),
+            },)
+		  }
+		  if  (productPrice[3]){
+			  detailSale.push( {
+              codigo_producto: document.getElementById("product3"),
+              cantidad: document.getElementById("amount3"),
+              valor_unitario: productPrice[3],
+              valor_total: document.getElementById("value3"),
+            },)
+		  }	
+
+          var confirmRequest = $.ajax({
+            type: "GET",
+            url:
+              "http://localhost:8080/sales/create?cedulaCliente=" +
+              id +
+              "&direccionCliente=" +
+              direccion +
+              "&emailCliente=" +
+              email +
+              "&nombreCliente=" +
+              nombre +
+              "&telefonoCliente=" +
+              telefono,
+            success: function (data) {
+              if (data && data.codigo_producto) {
+                document.getElementById("productName" + index).value =
+                  data.nombre_producto;
+                productPrice[index] = data.precio_venta;
+                productIva[index] = data.iva_compra;
+              } else {
+                alert("Producto no encontrado");
+              }
+            },
+          });
+        }
       }
     </script>
   </head>
@@ -163,63 +208,187 @@
         "
       >
         <div style="max-width: 1000px; width: 100%; padding: 0 40px">
-          <div class="row">
-            <div class="col-4">
-              <label class="form-label">Cédula</label>
-              <input class="form-control" id="id" />
-            </div>
-            <div class="col-2" style="margin-top: auto">
-              <button type="button" class="btn btn-primary" onclick="get()">
-                Consultar
+          <div class="row" style="margin-bottom: 20px">
+            <div class="col-5" style="display: flex; flex-direction: row">
+              <div>
+                <label class="form-label">Cédula</label>
+                <input class="form-control" id="id" />
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="getCustomer()"
+                style="margin-top: auto; margin-left: 25px"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-search"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                  />
+                </svg>
               </button>
             </div>
-            <div class="col-6">
-              <label class="form-label">Nombre</label>
+            <div class="col-5">
+              <label class="form-label">Cliente</label>
+              <input class="form-control" id="clientName" disabled />
+            </div>
+            <div class="col-2">
+              <label class="form-label">Consecutivo</label>
               <input class="form-control" id="clientName" disabled />
             </div>
           </div>
-          <div class="row">
-            <div class="col-3">
-              <label class="form-label">Producto</label>
-              <input class="form-control" id="id" />
-            </div>
-            <div class="col-2" style="margin-top: auto">
-              <button type="button" class="btn btn-primary" onclick="get()">
-                Consultar
+
+          <div class="row" style="margin-bottom: 15px">
+            <div class="col-5" style="display: flex; flex-direction: row">
+              <div>
+                <label class="form-label">Cod. Producto</label>
+                <input class="form-control" id="product1" />
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="getProduct(1)"
+                style="margin-top: auto; margin-left: 25px"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-search"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                  />
+                </svg>
               </button>
             </div>
             <div class="col-3">
-              <label class="form-label">Nombre</label>
-              <input class="form-control" id="clientName" disabled/>
+              <label class="form-label">Nombre Producto</label>
+              <input class="form-control" id="productName1" disabled />
             </div>
             <div class="col-2">
               <label class="form-label">Cantidad</label>
-              <input class="form-control" id="clientName" />
+              <input
+                class="form-control"
+                id="amount1"
+                onchange="amountChange(1)"
+              />
             </div>
             <div class="col-2">
               <label class="form-label">Valor Total</label>
-              <input class="form-control" id="clientName" disabled />
+              <input class="form-control" id="value1" disabled />
             </div>
           </div>
+
+          <div class="row" style="margin-bottom: 15px">
+            <div class="col-5" style="display: flex; flex-direction: row">
+              <div>
+                <input class="form-control" id="product2" />
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="getProduct(2)"
+                style="margin-top: auto; margin-left: 25px"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-search"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="col-3">
+              <input class="form-control" id="productName2" disabled />
+            </div>
+            <div class="col-2">
+              <input
+                class="form-control"
+                id="amount2"
+                onchange="amountChange(2)"
+              />
+            </div>
+            <div class="col-2">
+              <input class="form-control" id="value2" disabled />
+            </div>
+          </div>
+
           <div class="row">
+            <div class="col-5" style="display: flex; flex-direction: row">
+              <div>
+                <input class="form-control" id="product3" />
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="getProduct(3)"
+                style="margin-top: auto; margin-left: 25px"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-search"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="col-3">
+              <input class="form-control" id="productName3" disabled />
+            </div>
+            <div class="col-2">
+              <input
+                class="form-control"
+                id="amount3"
+                onchange="amountChange(3)"
+              />
+            </div>
+            <div class="col-2">
+              <input class="form-control" id="value3" disabled />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 20px">
             <div class="col-6"></div>
             <div class="col-6">
               <div class="row">
                 <div class="col">Total Venta</div>
                 <div class="col">
-                  <input class="form-control" id="clientName" disabled />
+                  <input class="form-control" id="totalSale" disabled />
                 </div>
               </div>
-              <div class="row">
-                <div class="col">Total Iva</div>
+              <div class="row" style="margin-top: 10px">
+                <div class="col">Total IVA</div>
                 <div class="col">
-                  <input class="form-control" id="clientName" disabled />
+                  <input class="form-control" id="totalIva" disabled />
                 </div>
               </div>
-              <div class="row">
-                <div class="col">Total con Iva</div>
+              <div class="row" style="margin-top: 10px">
+                <div class="col">Total con IVA</div>
                 <div class="col">
-                  <input class="form-control" id="clientName" disabled />
+                  <input class="form-control" id="total" disabled />
                 </div>
               </div>
             </div>
@@ -229,7 +398,7 @@
               style="margin: 0 10px"
               type="button"
               class="btn btn-primary"
-              onclick="get()"
+              onclick="confirm()"
             >
               Confirmar
             </button>

@@ -56,7 +56,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/users/auth")
-	public boolean auth(String userName, String password) {
+	public UserDTO auth(String userName, String password) {
 		UserDAO dao = new UserDAO();
 		return dao.auth(userName, password);
 	}

@@ -31,7 +31,7 @@ create table ventas(
 );
 create table productos(
 	codigo_producto bigint not null auto_increment primary key,
-	iva_compra double,
+	iva double,
 	nit_proveedor bigint not null,
 	nombre_producto varchar (255),
 	precio_compra double,

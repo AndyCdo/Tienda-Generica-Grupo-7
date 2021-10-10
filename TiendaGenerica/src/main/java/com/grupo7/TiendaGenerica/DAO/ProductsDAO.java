@@ -17,10 +17,10 @@ public class ProductsDAO {
 			ResultSet result =query.executeQuery();
 			while (result.next()) {
 				ProductsDTO prod = new ProductsDTO();
-				prod.setCodigo_producto(Integer.parseInt(result.getString("codigo")));
+				prod.setCodigo_producto(Integer.parseInt(result.getString("codigo_producto")));
 				prod.setIva_compra(result.getFloat("iva"));
 				prod.setNitproveedor(Integer.parseInt(result.getString("nit_proveedor")));
-				prod.setNombre_producto(result.getString("nombre"));
+				prod.setNombre_producto(result.getString("nombre_producto"));
 				prod.setPrecio_compra(result.getFloat("precio_compra"));
 				prod.setPrecio_venta(result.getFloat("precio_venta"));
 				
@@ -60,10 +60,10 @@ public class ProductsDAO {
 			statement.setInt(1, codigo);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
-				prod.setCodigo_producto(Integer.parseInt(result.getString("codigo")));
+				prod.setCodigo_producto(Integer.parseInt(result.getString("codigo_producto")));
 				prod.setIva_compra(result.getFloat("iva"));
 				prod.setNitproveedor(Integer.parseInt(result.getString("nit_proveedor")));
-				prod.setNombre_producto(result.getString("nombre"));
+				prod.setNombre_producto(result.getString("nombre_producto"));
 				prod.setPrecio_compra(result.getFloat("precio_compra"));
 				prod.setPrecio_venta(result.getFloat("precio_venta"));
 			}
@@ -80,8 +80,8 @@ public class ProductsDAO {
 		MyConnection connection = new MyConnection();
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("UPDATE productos SET iva_compra =  '" + prod.getIva_compra()
-					+ "', nitproveedor = '" + prod.getNitproveedor() + "', nombre_producto = '" + prod.getNombre_producto() 
+			statement.executeUpdate("UPDATE productos SET iva =  '" + prod.getIva_compra()
+					+ "', nit_proveedor = '" + prod.getNitproveedor() + "', nombre_producto = '" + prod.getNombre_producto() 
 					+ "', precio_compra = '" + prod.getPrecio_compra() + "', precio_venta = '" + prod.getPrecio_compra() 
 					+ "' WHERE codigo_producto = " + prod.getCodigo_producto());
 			statement.close();
