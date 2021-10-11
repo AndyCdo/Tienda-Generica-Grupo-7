@@ -8,9 +8,28 @@ public class ProductsDTO {
 	private String nombre_producto;
 	private float precio_compra;
 	private float precio_venta;
-	public Integer getCodigo_producto() {
-		return codigo_producto;
+	
+	//CONSTRUCTOR
+		
+		public ProductsDTO(Integer codigo_producto, float iva_compra, Integer nitproveedor, String nombre_producto,
+			float precio_compra, float precio_venta) {
+		super();
+		this.codigo_producto = codigo_producto;
+		this.iva_compra = iva_compra;
+		this.nitproveedor = nitproveedor;
+		this.nombre_producto = nombre_producto;
+		this.precio_compra = precio_compra;
+		this.precio_venta = precio_venta;
 	}
+		
+	public ProductsDTO() {
+			// TODO Auto-generated constructor stub
+		}
+
+	//getters and setters	
+	public Integer getCodigo_producto() {
+			return codigo_producto;
+	}	
 	public void setCodigo_producto(Integer codigo_producto) {
 		this.codigo_producto = codigo_producto;
 	}
