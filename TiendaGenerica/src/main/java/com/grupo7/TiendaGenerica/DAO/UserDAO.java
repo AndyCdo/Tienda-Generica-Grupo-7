@@ -135,7 +135,7 @@ public class UserDAO {
 		} catch (Exception e) {
 			System.out.println("No se pudo autenticar el usuario \n" + e);
 		}
-		return false;
+		return null;
 	}
 
 }
