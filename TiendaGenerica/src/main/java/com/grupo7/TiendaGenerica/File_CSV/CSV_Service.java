@@ -1,4 +1,4 @@
-package  com.grupo7.TiendaGenerica.File_CSV;
+package com.grupo7.TiendaGenerica.File_CSV;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

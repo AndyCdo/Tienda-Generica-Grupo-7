@@ -1,4 +1,4 @@
-package  com.grupo7.TiendaGenerica.File_CSV;
+package com.grupo7.TiendaGenerica.File_CSV;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
