@@ -106,7 +106,7 @@ public class UserDAO {
 		return false;
 	}
 
-	public boolean auth(String userName, String password) {
+	public UserDTO auth(String userName, String password) {
 		MyConnection connection = new MyConnection();
 		UserDTO user = new UserDTO();
 		try {
@@ -127,9 +127,9 @@ public class UserDAO {
 			statement.close();
 			connection.disconect();
 			if (user.getCedulaUsuario() != null) {
-				return true;
+				return user;
 			} else {
-				return false;
+				return null;
 			}
 
 		} catch (Exception e) {

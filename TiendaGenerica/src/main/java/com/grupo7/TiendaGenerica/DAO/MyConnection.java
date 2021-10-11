@@ -4,16 +4,16 @@ import java.sql.*;
 
 public class MyConnection {
 
-	static String bd = "tienda_generica";
-	static String login = "root";
-	static String password = "";
-	static String url = "jdbc:mysql://localhost/" + bd;
+	static String bd = "tienda_generica_grupo7";
+	static String login = "grupo7";
+	static String password = "AdminGrupo7";
+	static String url = "jdbc:mariadb://tiendagenericagrupo7.c47knbsonjdi.us-east-2.rds.amazonaws.com:3306/" + bd;
 
 	Connection connection = null;
 
 	public MyConnection() {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver");
 			connection = DriverManager.getConnection(url, login, password);
 			if (connection != null) {
 				System.out.println("Conexion a base de datos " + bd + " ok\n");

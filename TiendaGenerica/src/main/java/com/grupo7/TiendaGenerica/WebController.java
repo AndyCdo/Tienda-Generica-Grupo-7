@@ -19,17 +19,23 @@ public class WebController {
 		
 	}
 	
-	@RequestMapping("/provider")
+	@RequestMapping("/providers")
 	public String providerView()
 	{
 		return "prov";		
 	}	
 	
-	@RequestMapping("/customer")
+	@RequestMapping("/customers")
 	public String customerView()
 	{
 		return "customer";
 		
 	}
-			
+
+	@RequestMapping("/sales")
+	public String salesView()
+	{
+		return "sales";
+		
+	}		
 }
