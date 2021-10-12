@@ -32,6 +32,14 @@ public class WebController {
 		
 	}
 
+	@RequestMapping("/products")
+	public String productView()
+	{
+		return "products";
+		
+	}
+
+
 	@RequestMapping("/sales")
 	public String salesView()
 	{

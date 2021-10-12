@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 <head>
 <style>
 body {
@@ -93,10 +93,17 @@ h1 {
 	
 	</script>
 </head>
-<body>
-	<div class="h2" style="justify-content: center; display: flex; margin-top: 20px;">
-		TIENDA GENERICA GRUPO 7
-	</div>
+<body style="height: 100%;">
+	<div
+      style="
+        width: 100%;
+        height: 100%;
+        background: url('imagenes/background.jpg') no-repeat center center fixed;
+        background-size: cover;
+		padding-top: 20PX;
+      "
+    >
+	
 	<div style="display: flex; justify-content: center; margin-bottom: 50px;">
 		<div style="max-width: 1000px; width: 100%; padding: 0 40px;">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -105,6 +112,10 @@ h1 {
 				  <span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
+					<div class="navbar-brand">
+						TIENDA GENÉRICA GRUPO 7
+		
+					  </div>
 				  <ul class="navbar-nav">
 					<li class="nav-item">
 					  <a class="nav-link" href="/users">Usuarios</a>
@@ -140,7 +151,7 @@ h1 {
 						<input class="form-control" id="id" >
 						
 					  </div>
-					  <div class="row">
+					  <div class="col">
 						<label class="form-label">Direccion Cliente</label>
 						<input class="form-control" id="direccion">
 					  </div>
