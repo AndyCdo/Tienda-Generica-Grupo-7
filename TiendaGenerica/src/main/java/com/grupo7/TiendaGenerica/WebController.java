@@ -45,5 +45,12 @@ public class WebController {
 	{
 		return "sales";
 		
-	}		
+	}
+	
+	@RequestMapping("/reports")
+	public String reportsView()
+	{
+		return "reports";
+		
+	}	
 }
