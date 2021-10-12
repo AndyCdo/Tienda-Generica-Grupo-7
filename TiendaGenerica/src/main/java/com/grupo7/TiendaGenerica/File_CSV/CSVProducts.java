@@ -1,4 +1,4 @@
-package File_CSV;
+package com.grupo7.TiendaGenerica.File_CSV;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.csv.QuoteMode;
+//import org.apache.commons.csv.CSVFormat;
+//import org.apache.commons.csv.CSVParser;
+//import org.apache.commons.csv.CSVPrinter;
+//import org.apache.commons.csv.CSVRecord;
+//import org.apache.commons.csv.QuoteMode;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo7.TiendaGenerica.DTO.ProductsDTO;
@@ -37,8 +37,9 @@ public class CSVProducts {
   public static List<ProductsDTO> csvproductsTG7(InputStream is) {
     try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         CSVParser csvParser = new CSVParser(fileReader,
-            CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
-
+            CSVFormat.DEFAULT);) {
+    	
+    	
       List<ProductsDTO> productsList = new ArrayList<>();
 
       Iterable<CSVRecord> csvRecords = csvParser.getRecords();

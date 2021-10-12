@@ -1,4 +1,4 @@
-package File_CSV;
+package com.grupo7.TiendaGenerica.File_CSV;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
