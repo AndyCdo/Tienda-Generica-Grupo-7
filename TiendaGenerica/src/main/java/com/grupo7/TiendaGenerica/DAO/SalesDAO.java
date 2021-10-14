@@ -2,10 +2,11 @@ package com.grupo7.TiendaGenerica.DAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
+import com.grupo7.TiendaGenerica.DTO.DetailSaleDTO;
 import com.grupo7.TiendaGenerica.DTO.SalesDTO;
 
 public class SalesDAO {
@@ -34,20 +35,57 @@ public class SalesDAO {
 		}
 		return sales;
 	}
-	public boolean createSale(SalesDTO sales) {
+	
+	public boolean createDetailSale(ArrayList<DetailSaleDTO> details, Integer codigoVenta) {
 		MyConnection connection = new MyConnection();
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("INSERT INTO ventas VALUES ('" + sales.getCodigoVenta() + "', '"
-					+ sales.getCedulaCliente() + "', '" + sales.getCedulaUsuario() + "', '" + sales.getIvaVenta() + "', '"
-					+ sales.getTotalVenta() + "', '" + sales.getValorVenta() + "')");
+			for (DetailSaleDTO detail : details){
+			statement.executeUpdate("INSERT INTO detalle_ventas (cantidad_producto, codigo_producto, codigo_venta, valor_total, valor_venta, valor_iva) VALUES ('" + detail.getCantidadProducto() + "', '"
+					+ detail.getCodigoProducto() + "', '" + codigoVenta + "', '" + detail.getValorTotal() + "', '"
+					+ detail.getValorVenta() + "', '" + detail.getValorIva() + "')");
+			}
 			statement.close();
 			connection.disconect();
 			return true;
 		} catch (Exception e) {
-			System.out.println("No se pudo crear el Venta \n" + e);
+			System.out.println("No se pudo crear el cliente \n" + e);
 		}
 		return false;
+	}
+	
+	public Integer createSale(SalesDTO sales) {
+		MyConnection connection = new MyConnection();
+		try (
+			PreparedStatement statement = connection.getConnection().prepareStatement("INSERT INTO ventas (cedula_cliente, cedula_usuario, iva_venta, total_venta, valor_venta) VALUES ('"
+					+ sales.getCedulaCliente() + "', '" + sales.getCedulaUsuario() + "', '" + sales.getIvaVenta() + "', '"
+					+ sales.getTotalVenta() + "', '" + sales.getValorVenta() + "')", 
+                    Statement.RETURN_GENERATED_KEYS);){
+			int affectedRows = statement.executeUpdate();
+
+	        if (affectedRows == 0) {
+	            throw new SQLException("Error creando la venta");
+	        }
+	        
+	        Integer codigoVenta;
+	        try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	codigoVenta = generatedKeys.getInt(1);
+	            }
+	            else {
+	                throw new SQLException("Creating user failed, no ID obtained.");
+	            }
+	        }
+	        statement.close();
+			connection.disconect();
+	        createDetailSale(sales.getDetailSale(), codigoVenta);
+			
+			return codigoVenta;
+			
+		} catch (Exception e) {
+			System.out.println("No se pudo crear la Venta \n" + e);
+		}
+		return null;
 	}
 	public SalesDTO getSales(int id) {
 		MyConnection connection = new MyConnection();

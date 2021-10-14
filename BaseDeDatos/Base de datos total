@@ -8,7 +8,7 @@ telefono_cliente varchar(255)
 create table usuarios(
 	cedula_usuario bigint not null primary key,
 	email_usuario varchar (255),
-	nombr_usuarioe varchar (255),
+	nombre_usuario varchar (255),
 	password varchar (255),
 	usuario varchar (255)
 );

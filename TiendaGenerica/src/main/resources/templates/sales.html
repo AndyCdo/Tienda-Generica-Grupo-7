@@ -87,64 +87,69 @@
         document.getElementById("totalIva").value = totalIva;
         var total = totalIva + priceSale;
         document.getElementById("total").value = total;
+      }
 
-        function confirm() {
+      function confirm() {
           var clientId = document.getElementById("id").value;
-		  var userId = localStorage.getItem("userId");
+		      var userId = localStorage.getItem("userId");
           var total = document.getElementById("total").value;
           var totalIva = document.getElementById("totalIva").value;
           var salesTotal = document.getElementById("totalSale").value;
           var detailSale = [
             {
-              codigo_producto: document.getElementById("product1"),
-              cantidad: document.getElementById("amount1"),
-              valor_unitario: productPrice[1],
-              valor_total: document.getElementById("value1"),
+              codigoProducto: document.getElementById("product1").value,
+              cantidadProducto: document.getElementById("amount1").value,
+              valorVenta: productPrice[1],
+              valorTotal: document.getElementById("value1").value,
+              valorIva: (parseInt(document.getElementById("value1").value, 10) * productIva[1]) / 100,
             },
           ];
 		  if (productPrice[2]){
 			  detailSale.push( {
-              codigo_producto: document.getElementById("product2"),
-              cantidad: document.getElementById("amount2"),
-              valor_unitario: productPrice[2],
-              valor_total: document.getElementById("value2"),
+              codigoProducto: document.getElementById("product2").value,
+              cantidadProducto: document.getElementById("amount2").value,
+              valorVenta: productPrice[2],
+              valorTotal: document.getElementById("value2").value,
+              valorIva: (parseInt(document.getElementById("value2").value, 10) * productIva[2]) / 100,
             },)
 		  }
 		  if  (productPrice[3]){
 			  detailSale.push( {
-              codigo_producto: document.getElementById("product3"),
-              cantidad: document.getElementById("amount3"),
-              valor_unitario: productPrice[3],
-              valor_total: document.getElementById("value3"),
+              codigoProducto: document.getElementById("product3").value,
+              cantidadProducto: document.getElementById("amount3").value,
+              valorVenta: productPrice[3],
+              valorTotal: document.getElementById("value3").value,
+              valorIva: (parseInt(document.getElementById("value3").value, 10) * productIva[3]) / 100,
             },)
 		  }	
-
-          var confirmRequest = $.ajax({
-            type: "GET",
-            url:
-              "http://localhost:8080/sales/create?cedulaCliente=" +
-              id +
-              "&direccionCliente=" +
-              direccion +
-              "&emailCliente=" +
-              email +
-              "&nombreCliente=" +
-              nombre +
-              "&telefonoCliente=" +
-              telefono,
-            success: function (data) {
-              if (data && data.codigo_producto) {
-                document.getElementById("productName" + index).value =
-                  data.nombre_producto;
-                productPrice[index] = data.precio_venta;
-                productIva[index] = data.iva_compra;
+      $.ajax({
+    contentType: 'application/json',
+    data: JSON.stringify({"cedulaCliente": clientId, 
+              "cedulaUsuario": userId,
+              "ivaVenta": totalIva, 
+              "totalVenta": salesTotal,
+              "valorVenta": total,
+              "detailSale": detailSale,
+              }), 
+    dataType: 'json',
+    success: function(data){
+      if (data ) {
+                document.getElementById("saleId").value =
+                  data;
+                alert("Venta Confirmada")
               } else {
-                alert("Producto no encontrado");
-              }
-            },
-          });
-        }
-      }
+                alert("No se pudo guardar la venta");
+              };
+    },
+    error: function(){
+        app.log("No se pudo guardar la venta");
+    },
+    processData: false,
+    type: 'POST',
+    url: "http://localhost:8080/sales/create"
+});
+}
+
     </script>
   </head>
   <body style="height: 100%;">
@@ -251,7 +256,7 @@
             </div>
             <div class="col-2">
               <label class="form-label">Consecutivo</label>
-              <input class="form-control" id="clientName" disabled />
+              <input class="form-control" id="saleId" disabled />
             </div>
           </div>
 

@@ -1,25 +1,26 @@
 package com.grupo7.TiendaGenerica;
 
+
 import java.util.ArrayList;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo7.TiendaGenerica.DAO.SalesDAO;
 import com.grupo7.TiendaGenerica.DTO.SalesDTO;
 
+@RestController
 public class SalesController {
 	
-	@RequestMapping("/sales/confirmar")
-	public boolean create(int codigoVenta, int cedulaCliente, int cedulaUsuario, 
-			float ivaVenta, float totalVenta, float valorVenta) {
-		SalesDTO sale = new SalesDTO();
-		sale.setCodigoVenta(codigoVenta);
-		sale.setCedulaCliente(cedulaCliente);
-		sale.setCedulaUsuario(cedulaUsuario);
-		sale.setIvaVenta(ivaVenta);
-		sale.setTotalVenta(totalVenta);
-		sale.setValorVenta(valorVenta);
+	@RequestMapping(
+	        value = "/sales/create",
+	        method = RequestMethod.POST,
+	        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public Integer create(@RequestBody SalesDTO sale) {
 		SalesDAO dao = new SalesDAO();
 		return dao.createSale(sale);
 	}
@@ -30,9 +31,6 @@ public class SalesController {
 		return dao.saleList();
 	}
 	
-
-	
-
 	@RequestMapping("/sales/get")
 	public SalesDTO get(int codigo) {
 		SalesDAO dao = new SalesDAO();
