@@ -53,4 +53,25 @@ public class WebController {
 		return "reports";
 		
 	}	
+	
+	@RequestMapping("/reports/userslist")
+	public String reportsusersView()
+	{
+		return "reports/userslist";
+		
+	}	
+	
+	@RequestMapping("/reports/saleslist")
+	public String reportssalesView()
+	{
+		return "reports/saleslist";
+		
+	}
+	
+	@RequestMapping("/reports/customerslist")
+	public String reportscustomersView()
+	{
+		return "reports/customerslist";
+		
+	}	
 }
