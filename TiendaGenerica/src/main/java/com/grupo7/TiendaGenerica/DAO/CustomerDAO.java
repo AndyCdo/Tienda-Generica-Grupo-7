@@ -77,7 +77,7 @@ public class CustomerDAO {
 			Statement statement = connection.getConnection().createStatement();
 			statement.executeUpdate("UPDATE clientes SET email_cliente =  '" + customer.getEmailCliente()
 					+ "', direccion_cliente ='" + customer.getDireccionCliente() + "', nombre_cliente = '" + customer.getNombreCliente()
-					+ "', telefono_cliente ='" + customer.getTelefonoCliente() +"'");
+					+ "', telefono_cliente ='" + customer.getTelefonoCliente() +"' WHERE cedula_cliente = " + customer.getCedulaCliente());
 			statement.close();
 			connection.disconect();
 			return true;

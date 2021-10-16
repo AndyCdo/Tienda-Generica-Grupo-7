@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo7.TiendaGenerica.DAO.SalesDAO;
 import com.grupo7.TiendaGenerica.DTO.SalesDTO;
+import com.grupo7.TiendaGenerica.DTO.SalesReportDTO;
 
 @RestController
 public class SalesController {
@@ -26,9 +27,9 @@ public class SalesController {
 	}
 	
 	@RequestMapping("/sales/list")
-	public ArrayList<SalesDTO> list() {
+	public ArrayList<SalesReportDTO> list() {
 		SalesDAO dao = new SalesDAO();
-		return dao.saleList();
+		return dao.saleReport();
 	}
 	
 	@RequestMapping("/sales/get")

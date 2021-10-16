@@ -8,8 +8,35 @@ import java.util.ArrayList;
 
 import com.grupo7.TiendaGenerica.DTO.DetailSaleDTO;
 import com.grupo7.TiendaGenerica.DTO.SalesDTO;
+import com.grupo7.TiendaGenerica.DTO.SalesReportDTO;
+
+
 
 public class SalesDAO {
+
+	public ArrayList<SalesReportDTO> saleReport(){
+		ArrayList<SalesReportDTO> sales = new ArrayList<SalesReportDTO>();
+		MyConnection connection = new MyConnection();
+		try {
+			PreparedStatement query = connection.getConnection().prepareStatement("SELECT ventas.cedula_cliente, nombre_cliente, SUM(valor_venta) as total_venta FROM ventas inner join clientes on ventas.cedula_cliente = clientes.cedula_cliente GROUP BY ventas.cedula_cliente");
+			ResultSet result =query.executeQuery();
+			while (result.next()) {
+				SalesReportDTO sale = new SalesReportDTO();				
+				sale.setCedulaCliente(Integer.parseInt(result.getString("cedula_cliente")));
+				sale.setNombreCliente(result.getString("nombre_cliente"));			
+				sale.setTotalVenta(result.getFloat("total_venta"));
+				
+				sales.add(sale);
+				}
+			result.close();
+			query.close();
+			connection.disconect();
+		} catch (Exception e) {
+			System.out.println("No se pudo consultar el reporte \n" + e);
+		}
+		return sales;
+	}
+
 	public ArrayList<SalesDTO> saleList(){
 		ArrayList<SalesDTO> sales = new ArrayList<SalesDTO>();
 		MyConnection connection = new MyConnection();
