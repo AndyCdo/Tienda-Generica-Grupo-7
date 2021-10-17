@@ -15,11 +15,11 @@ public class ProviderDAO {
 			ResultSet result = query.executeQuery();
 			while (result.next()) {
 				ProviderDTO pro = new ProviderDTO();
-				pro.setNit(Integer.parseInt(result.getString("nit")));
-				pro.setProveedor(result.getString("proveedor"));
-				pro.setDireccion(result.getString("direccion"));
-				pro.setTelefono(result.getString("telefono"));
-				pro.setCiudad(result.getString("ciudad"));
+				pro.setNit(Integer.parseInt(result.getString("nit_proveedor")));
+				pro.setProveedor(result.getString("nombre_proveedor"));
+				pro.setDireccion(result.getString("direccion_proveedor"));
+				pro.setTelefono(result.getString("telefono_proveedor"));
+				pro.setCiudad(result.getString("ciudad_proveedor"));
 
 				provider.add(pro);
 			}
@@ -53,15 +53,15 @@ public class ProviderDAO {
 		ProviderDTO pro = new ProviderDTO();
 		try {
 			PreparedStatement statement = connection.getConnection()
-					.prepareStatement("SELECT * FROM proveedores WHERE nit = ?");
+					.prepareStatement("SELECT * FROM proveedores WHERE nit_proveedor = ?");
 			statement.setInt(1, id);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
-				pro.setNit(Integer.parseInt(result.getString("nit")));
-				pro.setProveedor(result.getString("proveedor"));
-				pro.setDireccion(result.getString("direccion"));
-				pro.setTelefono(result.getString("telefono"));
-				pro.setCiudad(result.getString("ciudad"));
+				pro.setNit(Integer.parseInt(result.getString("nit_proveedor")));
+				pro.setProveedor(result.getString("nombre_proveedor"));
+				pro.setDireccion(result.getString("direccion_proveedor"));
+				pro.setTelefono(result.getString("telefono_proveedor"));
+				pro.setCiudad(result.getString("ciudad_proveedor"));
 			}
 			result.close();
 			statement.close();
@@ -77,9 +77,9 @@ public class ProviderDAO {
 		MyConnection connection = new MyConnection();
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("UPDATE proveedores SET nit =  '" + pro.getNit()
-					+ "', proveedor = '" + pro.getProveedor() + "', direccion = '" + pro.getDireccion()
-					+ "', telefono = '" + pro.getTelefono() + "' WHERE ciudad = " + pro.getCiudad());
+			statement.executeUpdate("UPDATE proveedores SET nit_proveedor =  '" + pro.getNit()
+					+ "', nombre_proveedor = '" + pro.getProveedor() + "', direccion_proveedor = '" + pro.getDireccion()
+					+ "', telefono_proveedor = '" + pro.getTelefono() + "' WHERE nit_proveedor = " + pro.getNit());
 			statement.close();
 			connection.disconect();
 			return true;
@@ -94,7 +94,7 @@ public class ProviderDAO {
 		MyConnection connection = new MyConnection();
 		try {
 			PreparedStatement statement = connection.getConnection()
-					.prepareStatement("DELETE FROM proveedores WHERE nit = ?");
+					.prepareStatement("DELETE FROM proveedores WHERE nit_proveedor = ?");
 			statement.setInt(1, id);
 			statement.executeUpdate();
 			statement.close();
@@ -106,36 +106,4 @@ public class ProviderDAO {
 		return false;
 	}
 
-	public boolean auth(String proName, String nit) {
-		MyConnection connection = new MyConnection();
-		ProviderDTO pro = new ProviderDTO();
-		try {
-			PreparedStatement statement = connection.getConnection()
-					.prepareStatement("SELECT * FROM proveedores WHERE proveedor = ? and nit = ?");
-			statement.setString(1, proName);
-			statement.setString(2, nit);
-			ResultSet result = statement.executeQuery();
-			if (result.next()) {
-				pro.setNit(Integer.parseInt(result.getString("nit")));
-				pro.setProveedor(result.getString("proveedor"));
-				pro.setCiudad(result.getString("ciudad"));
-				pro.setTelefono(result.getString("telefono"));
-				pro.setDireccion(result.getString("direccion"));
-
-			}
-			result.close();
-			statement.close();
-			connection.disconect();
-			if (pro.getNit() != null) {
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (Exception e) {
-			System.out.println("No se pudo autenticar el proveedor \n" + e);
-		}
-		return false;
 	}
-
-}

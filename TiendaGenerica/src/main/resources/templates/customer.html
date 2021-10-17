@@ -17,9 +17,11 @@ h1 {
 	<script>
 		function get(){
 			var id = document.getElementById("id").value
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/customer/get?id="+id,
+				url:baseUrl+"customer/get?id="+id,
 				success: function(data){
 					if(data && data.cedulaCliente){
 						document.getElementById("id").value= data.cedulaCliente
@@ -42,10 +44,11 @@ h1 {
 			var email = document.getElementById("email").value
 			var nombre = document.getElementById("nombre").value
 			var telefono = document.getElementById("telefono").value
-			
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/customer/create?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
+				url:baseUrl+"create?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
 				success: function(data){
 					if(data == true){
 						alert("Cliente creado correctamente")
@@ -62,9 +65,11 @@ h1 {
 			var email = document.getElementById("email").value
 			var nombre = document.getElementById("nombre").value
 			var telefono = document.getElementById("telefono").value
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/customer/update?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
+				url:baseUrl+"customer/update?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
 				success: function(data){
 					if(data == true){
 						alert("Cliente actualizado correctamente")
@@ -77,9 +82,11 @@ h1 {
 		}
 		function deleteUser(){
 			var id = document.getElementById("id").value
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/customer/delete?id="+id,
+				url:baseUrl+"customer/delete?id="+id,
 				success: function(data){
 					if(data == true){
 						alert("Cliente eliminado correctamente")

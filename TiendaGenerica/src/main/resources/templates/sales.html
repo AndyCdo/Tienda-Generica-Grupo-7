@@ -13,9 +13,11 @@
     <script>
       function getCustomer() {
         var id = document.getElementById("id").value;
+        var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
         var customerRequest = $.ajax({
           type: "GET",
-          url: "http://localhost:8080/customer/get?id=" + id,
+          url:baseUrl+"customer/get?id=" + id,
           success: function (data) {
             if (data && data.cedulaCliente) {
               document.getElementById("clientName").value = data.nombreCliente;
@@ -30,9 +32,11 @@
       var productIva = {};
       function getProduct(index) {
         var productCode = document.getElementById("product" + index).value;
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
         var productRequest = $.ajax({
           type: "GET",
-          url: "http://localhost:8080/products/get?codigo=" + productCode,
+          url: baseUrl+"products/get?codigo=" + productCode,
           success: function (data) {
             if (data && data.codigo_producto) {
               document.getElementById("productName" + index).value =
@@ -122,6 +126,8 @@
               valorIva: (parseInt(document.getElementById("value3").value, 10) * productIva[3]) / 100,
             },)
 		  }	
+      var getUrl = window.location;
+      var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
       $.ajax({
     contentType: 'application/json',
     data: JSON.stringify({"cedulaCliente": clientId, 
@@ -146,7 +152,7 @@
     },
     processData: false,
     type: 'POST',
-    url: "http://localhost:8080/sales/create"
+    url: baseUrl+"sales/create"
 });
 }
 

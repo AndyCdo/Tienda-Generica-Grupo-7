@@ -51,6 +51,25 @@ public class ProductsDAO {
 		return false;
 	}
 	
+	public boolean load(ArrayList<ProductsDTO> products) {
+		delete();
+		MyConnection connection = new MyConnection();
+		try {
+			Statement statement = connection.getConnection().createStatement();
+			for (ProductsDTO product: products) {
+				statement.executeUpdate("INSERT INTO productos VALUES ('" + product.getCodigo_producto() + "', '"
+						+ product.getIva_compra() + "', '" + product.getNitproveedor() + "', '" + product.getNombre_producto() + "', '"
+						+ product.getPrecio_compra() + "', '" + product.getPrecio_venta() + "')");
+			}
+			statement.close();
+			connection.disconect();
+			return true;
+		} catch (Exception e) {
+			System.out.println("No se pudo crear el producto \n" + e);
+		}
+		return false;
+	}
+	
 	public ProductsDTO getProd(int codigo) {
 		MyConnection connection = new MyConnection();
 		ProductsDTO prod = new ProductsDTO();
@@ -95,35 +114,17 @@ public class ProductsDAO {
 		return false;
 	}
 
-	public boolean auth(String prodName, String codigo) {
+	public boolean delete() {
 		MyConnection connection = new MyConnection();
-		ProductsDTO prod = new ProductsDTO();
 		try {
 			PreparedStatement statement = connection.getConnection()
-					.prepareStatement("SELECT * FROM productos WHERE nombre_producto = ? and codigo_producto = ?");
-			statement.setString(1, prodName);
-			statement.setString(2, codigo);
-			ResultSet result = statement.executeQuery();
-			if (result.next()) {
-				prod.setCodigo_producto(Integer.parseInt(result.getString("codigo")));
-				prod.setIva_compra(result.getFloat("iva"));
-				prod.setNitproveedor(Integer.parseInt(result.getString("nit_proveedor")));
-				prod.setNombre_producto(result.getString("nombre"));
-				prod.setPrecio_compra(result.getFloat("precio_compra"));
-				prod.setPrecio_venta(result.getFloat("precio_venta"));
-
-			}
-			result.close();
+					.prepareStatement("DELETE FROM productos");
+			statement.executeUpdate();
 			statement.close();
 			connection.disconect();
-			if (prod.getNitproveedor() != null) {
-				return true;
-			} else {
-				return false;
-			}
-
+			return true;
 		} catch (Exception e) {
-			System.out.println("No se pudo autenticar el proveedor \n" + e);
+			System.out.println("No se pudo eliminar los productos \n" + e);
 		}
 		return false;
 	}

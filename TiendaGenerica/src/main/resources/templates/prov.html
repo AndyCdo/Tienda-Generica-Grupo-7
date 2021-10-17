@@ -8,16 +8,19 @@
 	<script>
 		function get(){
 			var nit = document.getElementById("nit").value
+			console.log(nit);
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/get?nit="+nit,
+				url: baseUrl+"provider/get?id="+nit,
 				success: function(data){
-					if(data && data.cedulaUsuario){
-						document.getElementById("nit").value= data.nitProveedor
-						document.getElementById("direccion").value= data.direccionProveedor
-						document.getElementById("userName").value= data.nombreProveedor
-						document.getElementById("telefono").value= data.telefonoProveedor
-						document.getElementById("ciudad").value= data.ciudadProveedor
+					if(data && data.nit){
+						document.getElementById("nit").value= data.nit
+						document.getElementById("direccion").value= data.direccion
+						document.getElementById("userName").value= data.proveedor
+						document.getElementById("telefono").value= data.telefono
+						document.getElementById("ciudad").value= data.ciudad
 
 					}else{
 						alert("Proveedor no se ha encontrado")
@@ -32,10 +35,11 @@
 			var userName = document.getElementById("userName").value
 			var telefono = document.getElementById("telefono").value
 			var direccion = document.getElementById("direccion").value
-			
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/create?nitProveedor="+nit+"&ciudad="+ciudad+"&nombreProveedor="+userName+"&telefono="+telefono+"&direccionProveedor="+direccion,
+				url:baseUrl+"provider/create?nit="+nit+"&ciudad="+ciudad+"&proveedor="+userName+"&telefono="+telefono+"&direccion="+direccion,
 				success: function(data){
 					if(data == true){
 						alert("Proveedor creado correctamente")
@@ -52,9 +56,11 @@
 			var userName = document.getElementById("userName").value
 			var telefono = document.getElementById("telefono").value
 			var direccion = document.getElementById("direccion").value
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/update?nitProveedor="+nit+"&ciudad="+ciudad+"&nombreProveedor="+userName+"&telefono="+telefono+"&direccionProveedor="+direccion,
+				url:baseUrl+"provider/update?nit="+nit+"&ciudad="+ciudad+"&proveedor="+userName+"&telefono="+telefono+"&direccion="+direccion,
 				success: function(data){
 					if(data == true){
 						alert("Proveedor actualizado correctamente")
@@ -67,9 +73,11 @@
 		}
 		function deleteUser(){
 			var nit = document.getElementById("nit").value
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/prov/delete?nit="+nit,
+				url:baseUrl+"provider/delete?id="+nit,
 				success: function(data){
 					if(data == true){
 						alert("Proveedor eliminado correctamente")
@@ -137,27 +145,27 @@
 				<div class="row">
 					<div class="col">
 						<label class="form-label">NIT</label>
-						<input class="form-control" nit="nit" >
+						<input class="form-control" id="nit" >
 						
 					  </div>
 					  <div class="col">
 						<label class="form-label">Ciudad</label>
-						<input class="form-control" nit="ciudad">
+						<input class="form-control" id="ciudad">
 					  </div>
 				</div>
 				<div class="row">
 					<div class="col">
 						<label  class="form-label">Nombre Proveedor</label>
-						<input class="form-control" nit="userName">	
+						<input class="form-control" id="userName">	
 					  </div>   		
 			    		<div class="col">
 						<label class="form-label">Teléfono</label>
-						<input class="form-control" nit="telefono">
+						<input class="form-control" id="telefono">
 					  </div>
 				<div class="row">
 					<div class="col">
 						<label class="form-label">Dirección</label>
-						<input type="direccion" class="form-control"nit="direccion">
+						<input type="direccion" class="form-control"id="direccion">
 					</div>
 					<div class="col" ></div>
 				</div>

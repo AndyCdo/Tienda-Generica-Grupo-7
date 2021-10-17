@@ -14,17 +14,20 @@
       function auth() {
         var user = document.getElementById("user").value;
         var password = document.getElementById("password").value;
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
         var authRequest = $.ajax({
           type: "GET",
+          crossDomain: true,
           url:
-            "http://localhost:8080/users/auth?userName=" +
+            baseUrl+"users/auth?userName=" +
             user +
             "&password=" +
             password,
           success: function (data) {
             if (data && data.cedulaUsuario) {
               localStorage.setItem("userId", data.cedulaUsuario);
-              window.location = "http://localhost:8080/users";
+              window.location = baseUrl+"users";
             } else {
               alert("Usuario y/o Password incorrectos");
             }

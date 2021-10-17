@@ -8,9 +8,11 @@
 	<script>
 		function get(){
 			var id = document.getElementById("id").value
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/users/get?id="+id,
+				url:baseUrl+"users/get?id="+id,
 				success: function(data){
 					if(data && data.cedulaUsuario){
 						document.getElementById("id").value= data.cedulaUsuario
@@ -32,10 +34,12 @@
 			var userName = document.getElementById("userName").value
 			var password = document.getElementById("password").value
 			var email = document.getElementById("email").value
-			
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
+
 				type:"GET",
-				url:"http://localhost:8080/users/create?cedulaUsuario="+id+"&usuario="+user+"&nombreUsuario="+userName+"&password="+password+"&emailUsuario="+email,
+				url:baseUrl+"users/create?cedulaUsuario="+id+"&usuario="+user+"&nombreUsuario="+userName+"&password="+password+"&emailUsuario="+email,
 				success: function(data){
 					if(data == true){
 						alert("Usuario creado correctamente")
@@ -52,9 +56,11 @@
 			var userName = document.getElementById("userName").value
 			var password = document.getElementById("password").value
 			var email = document.getElementById("email").value
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:"http://localhost:8080/users/update?cedulaUsuario="+id+"&usuario="+user+"&nombreUsuario="+userName+"&password="+password+"&emailUsuario="+email,
+				url:baseUrl+"users/update?cedulaUsuario="+id+"&usuario="+user+"&nombreUsuario="+userName+"&password="+password+"&emailUsuario="+email,
 				success: function(data){
 					if(data == true){
 						alert("Usuario actualizado correctamente")
@@ -67,9 +73,12 @@
 		}
 		function deleteUser(){
 			var id = document.getElementById("id").value
+			var getUrl = window.location;
+        	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
+				
 				type:"GET",
-				url:"http://localhost:8080/users/delete?id="+id,
+				url:baseUrl+"users/delete?id="+id,
 				success: function(data){
 					if(data == true){
 						alert("Usuario eliminado correctamente")

@@ -2,7 +2,10 @@ package com.grupo7.TiendaGenerica;
 
 import java.util.ArrayList;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo7.TiendaGenerica.DAO.ProductsDAO;
@@ -45,15 +48,20 @@ public class ProductsController {
 		return dao.updateProd(codigo, prod);
 	}
 
+	@RequestMapping(
+	        value = "/products/load",
+	        method = RequestMethod.POST,
+	        consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public boolean create(@RequestBody ArrayList<ProductsDTO> products) {
+		ProductsDAO dao = new ProductsDAO();
+		return dao.load(products);
+	}
+
 	@RequestMapping("/products/get")
 	public ProductsDTO get(int codigo) {
 		ProductsDAO dao = new ProductsDAO();
 		return dao.getProd(codigo);
 	}
 
-	@RequestMapping("/products/auth")
-	public boolean auth(String prodName, String nit) {
-		ProductsDAO dao = new ProductsDAO();
-		return dao.auth(prodName, nit);
-	}
+	
 }

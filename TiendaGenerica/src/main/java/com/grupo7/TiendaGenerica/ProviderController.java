@@ -55,10 +55,5 @@ public class ProviderController {
 		return dao.getPro(id);
 	}
 
-	@RequestMapping("/provider/auth")
-	public boolean auth(String proName, String nit) {
-		ProviderDAO dao = new ProviderDAO();
-		return dao.auth(proName, nit);
-	}
 
 }
