@@ -48,7 +48,7 @@ h1 {
         	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 			var authRequest = $.ajax({
 				type:"GET",
-				url:baseUrl+"create?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
+				url:baseUrl+"customer/create?cedulaCliente="+id+"&direccionCliente="+direccion+"&emailCliente="+email+"&nombreCliente="+nombre+"&telefonoCliente="+telefono,
 				success: function(data){
 					if(data == true){
 						alert("Cliente creado correctamente")
