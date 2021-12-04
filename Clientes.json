@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "61aab6ebd2b9eb2d701aa975"
+  },
+  "Cedula_cliente": 1023315812,
+  "dirrecion_cliente": "Kra 90",
+  "correo_cliente": "admin@gmail.com",
+  "nombre_cliente": "admin",
+  "telefono_cliente": "1234568"
+},{
+  "_id": {
+    "$oid": "61aab7a6d2b9eb2d701aa977"
+  },
+  "Cedula_cliente": 101548605,
+  "dirrecion_cliente": "calle 90",
+  "correo_cliente": "ad_min@gmail.com",
+  "nombre_cliente": "admin_2",
+  "telefono_cliente": "000008"
+}]

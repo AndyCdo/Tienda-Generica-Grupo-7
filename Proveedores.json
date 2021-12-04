@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "61aab7dcd2b9eb2d701aa984"
+  },
+  "nit_proveedor": 1,
+  "nombre_proveedor": "tiendas D1",
+  "dirrecion_proveedor": "cra. 72",
+  "telefono_proveedor": "123456"
+},{
+  "_id": {
+    "$oid": "61aab876d2b9eb2d701aa985"
+  },
+  "nit_proveedor": 2,
+  "nombre_proveedor": "Jumbo",
+  "dirrecion_proveedor": "calle 80",
+  "telefono_proveedor": "2345678"
+},{
+  "_id": {
+    "$oid": "61aab88ed2b9eb2d701aa986"
+  },
+  "nit_proveedor": 3,
+  "nombre_proveedor": "exito",
+  "dirrecion_proveedor": "avenida 68",
+  "telefono_proveedor": "3456789"
+},{
+  "_id": {
+    "$oid": "61aab8afd2b9eb2d701aa987"
+  },
+  "nit_proveedor": 4,
+  "nombre_proveedor": "tiendas justo y bueno",
+  "dirrecion_proveedor": "cra. 90",
+  "telefono_proveedor": "6845232"
+},{
+  "_id": {
+    "$oid": "61aab8cad2b9eb2d701aa988"
+  },
+  "nit_proveedor": 5,
+  "nombre_proveedor": "carulla",
+  "dirrecion_proveedor": "calle 100",
+  "telefono_proveedor": "6100015"
+}]

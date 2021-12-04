@@ -1,0 +1,137 @@
+[{
+  "_id": {
+    "$oid": "61aa99af40d5dded90a78147"
+  },
+  "nit_proveedor": 1,
+  "nombre_producto": "melocotones",
+  "codigo_producto": 1,
+  "precio_venta": 30351
+},{
+  "_id": {
+    "$oid": "61aa9b5640d5dded90a78148"
+  },
+  "nombre_producto": "platanos",
+  "precio_venta": 35320,
+  "codigo_producto": 3,
+  "nit_proveedor": 4
+},{
+  "_id": {
+    "$oid": "61aaa1fc558e334aaad6766f"
+  },
+  "codigo_producto": 2,
+  "nombre_producto": "Manzanas",
+  "precio_venta": 21549,
+  "nit_proveedor": 3
+},{
+  "_id": {
+    "$oid": "61aaa23d558e334aaad67670"
+  },
+  "codigo_producto": 4,
+  "nit_proveedor": 3,
+  "nombre_producto": "lechuga",
+  "precio_venta": 35320
+},{
+  "_id": {
+    "$oid": "61aaa272558e334aaad67671"
+  },
+  "codigo_producto": 5,
+  "nit_proveedor": 1,
+  "nombre_producto": "tomates",
+  "precio_venta": 15159
+},{
+  "_id": {
+    "$oid": "61aaa2ae558e334aaad67672"
+  },
+  "codigo_productor": 6,
+  "nit_proveedor": 1,
+  "nombre_producto": "calabaza",
+  "precio_venta": 25365
+},{
+  "_id": {
+    "$oid": "61aaa2e4558e334aaad67673"
+  },
+  "codigo_producto": 7,
+  "nit_proveedor": 2,
+  "nombre_producto": "Apio",
+  "precio_venta": 22906
+},{
+  "_id": {
+    "$oid": "61aaa317558e334aaad67674"
+  },
+  "codigo_producto": 8,
+  "nit_proveedor": 2,
+  "nombre_producto": "pepino",
+  "precio_venta": 13040
+},{
+  "_id": {
+    "$oid": "61aaa354558e334aaad67675"
+  },
+  "codigo_producto": 9,
+  "nit_proveedor": 2,
+  "nombre_producto": "champinones",
+  "precio_venta": 13145
+},{
+  "_id": {
+    "$oid": "61aaa38c558e334aaad67676"
+  },
+  "codigo_producto": 10,
+  "nit_proveedor": 5,
+  "nombre_producto": "leche",
+  "precio_venta": 25169
+},{
+  "_id": {
+    "$oid": "61aaa57ed2b9eb2d701aa94d"
+  },
+  "codigo_producto": 12,
+  "nit_proveedor": 2,
+  "nombre_producto": "huevos",
+  "precio_venta": 31619
+},{
+  "_id": {
+    "$oid": "61aaa5d8d2b9eb2d701aa94f"
+  },
+  "codigo_producto": 13,
+  "nit_proveedor": 1,
+  "nombre_producto": "requeson",
+  "precio_venta": 17052
+},{
+  "_id": {
+    "$oid": "61aaa610d2b9eb2d701aa950"
+  },
+  "codigo_producto": 14,
+  "nit_proveedor": 1,
+  "nombre_producto": "crema_agria",
+  "precio_venta": 17679
+},{
+  "_id": {
+    "$oid": "61aaa646d2b9eb2d701aa952"
+  },
+  "codigo_producto": 15,
+  "nit_proveedor": 5,
+  "nombre_producto": "yogur",
+  "precio_venta": 17780
+},{
+  "_id": {
+    "$oid": "61aaa66dd2b9eb2d701aa953"
+  },
+  "codigo_producto": 16,
+  "nit_proveedor": 5,
+  "nombre_producto": "ternera",
+  "precio_venta": 34909
+},{
+  "_id": {
+    "$oid": "61aaa6a8d2b9eb2d701aa954"
+  },
+  "codigo_producto": 17,
+  "nit_proveedor": 5,
+  "nombre_producto": "salmon_salvaje",
+  "precio_venta": 14135
+},{
+  "_id": {
+    "$oid": "61aaa6ddd2b9eb2d701aa955"
+  },
+  "codigo_producto": 18,
+  "nit_proveedor": 1,
+  "nombre_producto": "patas_cangrejo",
+  "precio_venta": 35642
+}]

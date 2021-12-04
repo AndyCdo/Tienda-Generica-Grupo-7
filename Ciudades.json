@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "61aab92fd2b9eb2d701aa9a5"
+  },
+  "nombre_ciudad": "Bogota"
+},{
+  "_id": {
+    "$oid": "61aab959d2b9eb2d701aa9a6"
+  },
+  "nombre_ciudad": "medellin"
+},{
+  "_id": {
+    "$oid": "61aab962d2b9eb2d701aa9a7"
+  },
+  "nombre_ciudad": "cali"
+}]
